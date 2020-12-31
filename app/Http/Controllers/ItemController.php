@@ -116,7 +116,7 @@ class ItemController extends Controller
     {
         $existingItem = Item::find($id);
         if ( $existingItem ) {
-            Mail::to('max.sharov@gmail.com')->send(new Invoice($existingItem));
+            Mail::to($existingItem->email)->send(new Invoice($existingItem));
         }
 
         return 'Item not found.';
