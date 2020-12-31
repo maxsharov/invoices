@@ -135,7 +135,6 @@ class ItemController extends Controller
                 'receipt_email' => $existingItem->email,
                 'description'   => 'Invoice Payment',
                 'payment_method_types' => ['card'],
-                'receipt_email' => 'max.sharov@gmail.com',
             ]);
             
             // dd($payment_intent);
