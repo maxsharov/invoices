@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\SecretController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +27,7 @@ Route::prefix('/item')->group( function () {
     Route::get('/pay/{id}', [ItemController::class, 'initPayment']);
     Route::post('/store', [ItemController::class, 'store']);
     Route::put('/{id}', [ItemController::class, 'update']);
-    Route::delete('/{id}', [ItemController::class, 'destroy']);
+    // Route::delete('/{id}', [ItemController::class, 'destroy']);
 });
+
+Route::get('/secrets', [SecretController::class, 'index']);

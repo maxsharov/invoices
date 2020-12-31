@@ -124,28 +124,11 @@ class ItemController extends Controller
 
 
     public function initPayment($id) {
-        // $stripe = new \Stripe\StripeClient(
-        //     'sk_test_51I3yzgK9YNhLPRz6P6qSFHj8k3ODe4VDDCwBpJbcAoeTfbWrGWZRcBKsMGkwXFlmLQ96VAdbUKQrj71EzDd1cQyN00KErYvfjk'
-        //   );
-
-        // $stripe->paymentIntents->create([
-        //     'amount' => 2000,
-        //     'currency' => 'usd',
-        //     'payment_method_types' => ['card'],
-        //   ]);
         $existingItem = Item::find($id);
         if ( $existingItem ) {
             Stripe\Stripe::setApiKey('sk_test_51I3yzgK9YNhLPRz6P6qSFHj8k3ODe4VDDCwBpJbcAoeTfbWrGWZRcBKsMGkwXFlmLQ96VAdbUKQrj71EzDd1cQyN00KErYvfjk');
 
-            // $result = Stripe\PaymentIntent::create([
-            //   'amount' => 1000,
-            //   'currency' => 'usd',
-            //   'payment_method_types' => ['card'],
-            //   'receipt_email' => 'jenny.rosen@example.com',
-            // ]);
-
             $payment_intent = Stripe\PaymentIntent::create([
-                'description'   => 'Stripe Test Payment',
                 'amount'        => $existingItem->amount * 100,
                 'currency'      => 'USD',
                 'receipt_email' => $existingItem->email,
