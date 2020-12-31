@@ -28,8 +28,9 @@ class CheckoutController extends Controller
 
     }
 
-    public function afterPayment()
+    public function afterPayment(Request $request)
     {
+        dd($request);
         echo 'Payment Has been Received';
     }
 }

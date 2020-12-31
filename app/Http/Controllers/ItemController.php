@@ -119,11 +119,8 @@ class ItemController extends Controller
             Mail::to($existingItem->email)->send(new Invoice($existingItem));
         } else {
             return 'Item not found.';
-        }
-
-        
+        }        
     }
-
 
     public function initPayment($id) {
         $existingItem = Item::find($id);
