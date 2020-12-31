@@ -129,6 +129,7 @@ class ItemController extends Controller
             Stripe\Stripe::setApiKey('sk_test_51I3yzgK9YNhLPRz6P6qSFHj8k3ODe4VDDCwBpJbcAoeTfbWrGWZRcBKsMGkwXFlmLQ96VAdbUKQrj71EzDd1cQyN00KErYvfjk');
 
             $payment_intent = Stripe\PaymentIntent::create([
+                'description'   => 'Stripe Test Payment',
                 'amount'        => $existingItem->amount * 100,
                 'currency'      => 'USD',
                 'receipt_email' => $existingItem->email,
