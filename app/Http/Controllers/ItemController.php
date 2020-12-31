@@ -137,17 +137,13 @@ class ItemController extends Controller
                 'payment_method_types' => ['card'],
             ]);
             
-            // dd($payment_intent);
-
             $intent = $payment_intent->client_secret;
             $amount = $existingItem->amount;
             return view('checkout.credit-card', compact('intent', 'amount'));
-            // Session::flash('success', 'Payment successful!');
-
-            // print_r($result);
-
+        } else {
+            return 'Item not found.';
         }
 
-        return 'Item not found.';
+        
     }
 }
