@@ -27,7 +27,7 @@ class Invoice extends Mailable
         $this->amount = $item->amount;
         $this->name = $item->name;
         $this->id = $item->id;
-        $this->url = "http://invoices.test/api/item/pay/" . $item->id;
+        $this->url = env("APP_URL") . "/api/item/pay/" . $item->id;
     }
 
     /**
