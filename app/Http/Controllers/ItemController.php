@@ -138,7 +138,7 @@ class ItemController extends Controller
             
             $intent = $payment_intent->client_secret;
             $amount = $existingItem->amount;
-            return view('checkout.credit-card', compact('intent', 'amount'));
+            return view('checkout.credit-card2', compact('intent', 'amount'));
         } else {
             return 'Item not found.';
         }
