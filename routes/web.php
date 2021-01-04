@@ -16,6 +16,14 @@ use App\Http\Controllers\WebhookController;
 |
 */
 
+Route::post(
+    '/stripe/webhook',
+    // [WebhookController::class, 'handleWebhook']
+    function() {
+        Log::info('customer catch');
+    }
+);
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -65,14 +73,6 @@ Route::get('/user/invoice/{invoice}', function (Request $request, $invoiceId) {
         'product' => 'Your Product',
     ]);
 });
-
-Route::post(
-    '/stripe/webhook',
-    // [WebhookController::class, 'handleWebhook']
-    function() {
-        Log::info('customer catch');
-    }
-);
 
 require __DIR__.'/auth.php';
 
