@@ -15,6 +15,8 @@ class WebhookController extends Controller
      */
     protected function handleCustomerDeleted(array $payload)
     {
+        Log::info('Hi test:');
+
         if ($user = $this->getUserByStripeId($payload['data']['object']['id'])) {
             $user->subscriptions->each(function (Subscription $subscription) {
                 $subscription->skipTrial()->markAsCancelled();
@@ -28,7 +30,7 @@ class WebhookController extends Controller
             ])->save();
         }
 
-        Log::info('Customer was deleted: ' . $user->email);
+        Log::info('Customer was deleted');
 
         return $this->successMethod();
     }
