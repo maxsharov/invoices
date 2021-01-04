@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\WebhookController;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,7 +69,10 @@ Route::get('/user/invoice/{invoice}', function (Request $request, $invoiceId) {
 
 Route::post(
     '/stripe/webhook',
-    [WebhookController::class, 'handleWebhook']
+    // [WebhookController::class, 'handleWebhook']
+    function () {
+        Log::info('Test check from route web.php');
+    }
 );
 
 require __DIR__.'/auth.php';
