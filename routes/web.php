@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckoutController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\WebhookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +65,11 @@ Route::get('/user/invoice/{invoice}', function (Request $request, $invoiceId) {
         'product' => 'Your Product',
     ]);
 });
+
+Route::post(
+    '/stripe/webhook',
+    [WebhookController::class, 'handleWebhook']
+);
 
 require __DIR__.'/auth.php';
 
