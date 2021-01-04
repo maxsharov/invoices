@@ -23,12 +23,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-// Route::middleware(['auth', 'nonPayingCustomer'])->get('subscribe', function () {
-//     return view('subscribe', [
-//         'intent' => auth()->user()->createSetupIntent()
-//     ]);
-// })->name('subscribe');
-
 Route::get('/subscribe', function () {
     return view('subscribe', ['intent' => auth()->user()->createSetupIntent()]);
 })->middleware(['auth', 'nonPayingCustomer'])->name('subscribe');
@@ -43,6 +37,33 @@ Route::post('/subscribe', function (Request $request) {
 Route::get('/members', function () {
     return view('members');
 })->middleware(['auth', 'payingCustomer'])->name('members');
+
+Route::get('/charge', function () {
+    return view('charge', ['intent' => auth()->user()->createSetupIntent()]);
+})->middleware(['auth'])->name('charge');
+
+Route::post('/charge', function (Request $request) {
+
+    // auth()->user()->charge(1000, $request->paymentMethod);
+    auth()->user()->createAsStripeCustomer();
+    auth()->user()->updateDefaultPaymentMethod($request->paymentMethod);
+    auth()->user()->invoiceFor('One Time Fee', 1500);
+
+    return redirect('/dashboard');
+})->middleware(['auth'])->name('charge.post');
+
+Route::get('/invoices', function () {
+    return view('invoices', [
+        'invoices' => auth()->user()->invoices()
+        ]);
+})->middleware(['auth'])->name('invoices');
+
+Route::get('/user/invoice/{invoice}', function (Request $request, $invoiceId) {
+    return $request->user()->downloadInvoice($invoiceId, [
+        'vendor' => 'Your Company',
+        'product' => 'Your Product',
+    ]);
+});
 
 require __DIR__.'/auth.php';
 
