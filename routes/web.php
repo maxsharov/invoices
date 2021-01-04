@@ -68,7 +68,10 @@ Route::get('/user/invoice/{invoice}', function (Request $request, $invoiceId) {
 
 Route::post(
     '/stripe/webhook',
-    [WebhookController::class, 'handleWebhook']
+    // [WebhookController::class, 'handleWebhook']
+    function() {
+        Log::info('customer catch');
+    }
 );
 
 require __DIR__.'/auth.php';
